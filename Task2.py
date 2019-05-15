@@ -19,4 +19,17 @@ Print a message:
 "<telephone number> spent the longest time, <total time> seconds, on the phone during 
 September 2016.".
 """
+from datetime import datetime
 
+def longestCall():
+    longestTimeRecord = calls[0]
+    for call in calls:
+        currentCallTime = int(call[3])
+        longestCallTime = int(longestTimeRecord[3])
+        if currentCallTime > longestCallTime:
+            longestTimeRecord = call
+    return longestTimeRecord
+
+longestCall = longestCall()
+callDate = datetime.strptime(longestCall[2], '%d-%m-%Y %H:%M:%S')
+print("%s spent the longest time, %s seconds, on the phone during %s" % (longestCall[0], longestCall[3], callDate.strftime('%B %Y')) )
