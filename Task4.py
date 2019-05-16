@@ -24,4 +24,23 @@ Print a message:
 <list of numbers>
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
+def discardNumbers():
+    discardedNumbers = set()
+    for text in texts:
+        discardedNumbers.add(text[0])
+        discardedNumbers.add(text[1])
+    for call in calls:
+        discardedNumbers.add(call[1])
+    return discardedNumbers
 
+def identifyTelemarketPhone():
+    discardedNumbers = discardNumbers()
+    possibleNumbers = set()
+    for call in calls:
+        callingPhone = call[0]
+        if callingPhone not in discardedNumbers:
+            possibleNumbers.add(callingPhone)
+
+    return sorted(possibleNumbers)
+
+print("These numbers could be telemarketers: \n%s" % ('\n'.join(identifyTelemarketPhone())))
