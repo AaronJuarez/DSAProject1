@@ -30,3 +30,9 @@ def lastRecordOfCalls():
 
 print(firstRecordOfTexts())
 print(lastRecordOfCalls())
+
+
+#Unpacking operator (*)
+print("First record of texts, {0} texts {1} at time {2}".format(*texts[0]))
+#In python you can access the last item or row using negative index. So, you don't have to use len(calls) - 1 and can just use -1 instead.
+print("Last record of calls, {0} calls {1} at time {2}, lasting {3} seconds".format(*calls[-1]))

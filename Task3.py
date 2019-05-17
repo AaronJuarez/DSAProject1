@@ -47,20 +47,6 @@ The percentage should have 2 decimal digits
 def phonesCalled():
   phoneCodesSet = set()
   bangaloreCode = '(080)'
-  for call in calls:
-    callingPhone = call[0]
-    receivingPhone = call[1]
-    if bangaloreCode in callingPhone:
-      if receivingPhone.startswith( '(', 0, 1 ):
-        closingBracketIndex = receivingPhone.index(')')
-        phoneCodesSet.add(receivingPhone[1:closingBracketIndex])
-      elif receivingPhone.startswith('7') or receivingPhone.startswith('8') or receivingPhone.startswith('9'):
-        phoneCodesSet.add(receivingPhone[0:4])
-
-  return sorted(phoneCodesSet)
-
-def callsToBangalore():
-  bangaloreCode = '(080)'
   bangaloreCalls = 0
   bangaloreReceivedCalls = 0
   for call in calls:
@@ -70,8 +56,14 @@ def callsToBangalore():
       bangaloreCalls += 1
       if bangaloreCode in receivingPhone:
         bangaloreReceivedCalls += 1
-  result = (bangaloreReceivedCalls * 100) / bangaloreCalls
-  return (result)
+      if receivingPhone.startswith( '(', 0, 1 ):
+        closingBracketIndex = receivingPhone.index(')')
+        phoneCodesSet.add(receivingPhone[1:closingBracketIndex])
+      elif receivingPhone.startswith('7') or receivingPhone.startswith('8') or receivingPhone.startswith('9'):
+        phoneCodesSet.add(receivingPhone[0:4])
+  percent = (bangaloreReceivedCalls * 100) / bangaloreCalls
+  return sorted(phoneCodesSet), percent
 
-print("The numbers called by people in Bangalore have codes:\n%s" % ('\n'.join(phonesCalled())))
-print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." % (callsToBangalore()))
+codes, percent = phonesCalled()
+print("The numbers called by people in Bangalore have codes:\n%s" % ('\n'.join(codes)))
+print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." % (percent))

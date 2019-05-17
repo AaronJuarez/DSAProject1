@@ -22,14 +22,28 @@ September 2016.".
 from datetime import datetime
 
 def longestCall():
-    longestTimeRecord = calls[0]
+    timeRecord = {}
     for call in calls:
-        currentCallTime = int(call[3])
-        longestCallTime = int(longestTimeRecord[3])
+        seconds = int(call[3])
+        if call[0] not in timeRecord:
+            timeRecord[call[0]] = seconds
+        else:
+            timeRecord[call[0]] += seconds
+        if call[1] not in timeRecord:
+            timeRecord[call[1]] = seconds
+        else:
+            timeRecord[call[1]] += seconds
+        
+    
+    longestTimeRecord = None
+    for k, v in timeRecord.items():
+        if longestTimeRecord is None:
+            longestTimeRecord = (k,v)
+        currentCallTime = int(v)
+        longestCallTime = int(longestTimeRecord[1])
         if currentCallTime > longestCallTime:
-            longestTimeRecord = call
+            longestTimeRecord = (k,v)
     return longestTimeRecord
 
 longestCall = longestCall()
-callDate = datetime.strptime(longestCall[2], '%d-%m-%Y %H:%M:%S')
-print("%s spent the longest time, %s seconds, on the phone during %s" % (longestCall[0], longestCall[3], callDate.strftime('%B %Y')) )
+print("%s spent the longest time, %d seconds, on the phone during September 2016." % (longestCall[0], longestCall[1]))

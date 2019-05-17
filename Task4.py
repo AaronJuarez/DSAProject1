@@ -44,3 +44,10 @@ def identifyTelemarketPhone():
     return sorted(possibleNumbers)
 
 print("These numbers could be telemarketers: \n%s" % ('\n'.join(identifyTelemarketPhone())))
+
+#Simplified version
+check_list = set([item[0] for item in texts] + [item[1] for item in texts] + [item[1] for item in calls])
+
+possible_list = set([item[0] for item in calls])
+final_list = possible_list - check_list
+print("These numbers could be telemarketers:  \n" + "\n".join(sorted(final_list)))

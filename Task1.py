@@ -22,17 +22,11 @@ Print a message:
 def differentPhones():
     differentPhonesSet = set()
     for row in texts:
-        i = 0
-        while i in range(2):
-            phone = row[i]
-            differentPhonesSet.add(phone)
-            i += 1
+        differentPhonesSet.add(row[0])
+        differentPhonesSet.add(row[1])
     for row in calls:
-        i = 0
-        while i in range(2):
-            phone = row[i]
-            differentPhonesSet.add(phone)
-            i += 1
+        differentPhonesSet.add(row[0])
+        differentPhonesSet.add(row[1])
     return len(differentPhonesSet)
 
 print("There are %d different telephone numbers in the records." % (differentPhones()))
