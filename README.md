@@ -25,7 +25,7 @@ Leading to **O(n)**
 Because we are iterating the calls array one time and then making a second iteration when sorting,
 the run time is:
 ```
-n + n = 2n
+n + n log n
 ```
 resulting in **O(n)** 
 
@@ -39,12 +39,12 @@ n + n = 2n
 For the second method identifyTelemarketPhone() we are iterating one time over the calls array
 and one time for the sorting function. Although we iterate over the set we populated in the previous method, the average case scenario is o(1) when iterating a set. Resulting in:
 ```
-n + n + 1 -> O(2n)
+n + n log n + 1 -> O(n + n log n)
 ```
 
 Finally
 ```
-2n + 2n -> O(n)
+2n + n + n log n = 3n + n log n  -> O(n + n log n)
 ```
 
 
